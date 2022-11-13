@@ -11,11 +11,7 @@
     <!-- filter -->
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.1/css/jquery.dataTables.css">
     <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.js"></script>
-    <script>
-        $(document).ready( function () {
-            $('#all_recipes').DataTable();
-        } );
-    </script>
+
 </head>
     <body>
 
@@ -38,6 +34,13 @@
         <a th:href="@{/filter}">I will filter things for you!(yet to be implemented)</a>
         -->
     </div>
+    <fieldset>
+        <p>Search for Ratings:</p>
+        <input type="radio" name="ratings" id="ratings-1"> <label for="ratings-1"> </label> <br>
+        <input type="radio" name="ratings" id="ratings-2"> <label for="ratings-2"> </label> <br>
+        <input type="radio" name="ratings" id="ratings-3"> <label for="ratings-3"> </label> <br>
+        <input type="radio" name="ratings" id="ratings-4"> <label for="ratings-4"> </label> <br>
+    </fieldset>
     <table id="all_recipes" class="display">
         <thead>
         <tr>
@@ -70,9 +73,17 @@
         </tr>
         </tbody>
     </table>
+    <!--
     <form action="search" method="post">
         <input type="text" name="toSearch" id="toSearch" placeholder=""/>
         <input type="submit" value="search recipe database"/>
     </form>
+    -->
+    <!-- Scripts -->
+    <script>
+        $(document).ready( function () {
+            $('#all_recipes').DataTable();
+        } );
+    </script>
     </body>
 </html>
