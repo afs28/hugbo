@@ -17,9 +17,6 @@
         <java.version>18</java.version>
         <!-- <spring-security.version>5.3.4.RELEASE</spring-security.version>
         <spring.version>5.2.8.RELEASE</spring.version> -->
-        <maven.compiler.source>18</maven.compiler.source>
-        <maven.compiler.target>18</maven.compiler.target>
-        <maven.compiler.release>18</maven.compiler.release>
     </properties>
     <dependencies>
         <dependency>
