@@ -7,8 +7,11 @@ import java.util.List;
 
 /**
  * The recipe user repository.
- * @Authors: AFS
  *
+ * @@author Arnar Freyr
+ * @author Birgitta Yr
+ * @author Heba Solveig
+ * @author Hrefna Kare
  */
 
 public interface RecipeUserRepository extends JpaRepository<RecipeUser, Long> {
