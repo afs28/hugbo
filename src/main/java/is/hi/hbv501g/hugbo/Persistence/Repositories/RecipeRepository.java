@@ -5,6 +5,15 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
 
+/**
+ * The recipe repository.
+ *
+ * @author Arnar Freyr
+ * @author Birgitta Yr
+ * @author Heba Solveig
+ * @author Hrefna Kare
+ */
+
 public interface RecipeRepository extends JpaRepository<Recipe, Long> {
 
     Recipe save(Recipe recipe);

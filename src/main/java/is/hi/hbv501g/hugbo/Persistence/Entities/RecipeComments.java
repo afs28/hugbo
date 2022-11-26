@@ -4,6 +4,15 @@ import com.sun.istack.NotNull;
 
 import javax.persistence.*;
 
+/**
+ * The main recipe comments class, getters and setters.
+ * the @column is used to make sure it goes to the right column in the database
+ *
+ * @author Arnar Freyr
+ * @author Birgitta Yr
+ * @author Heba Solveig
+ * @author Hrefna Karen
+ */
 @Entity
 @Table(name="recipecomment")
 public class RecipeComments  {
