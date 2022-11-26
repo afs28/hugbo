@@ -34,12 +34,17 @@ public class LoginController {
                 Það er notað GET skipun (á loginPage)
         Eftir:  skilar login/signup síðuni
      */
+    // display login page
     @RequestMapping(value = "/login", method = RequestMethod.GET)
     public String loginPage(HttpSession session, Model model, RecipeUser recipeUser) {
         return "login";
     }
 
 
+    // login
+    // if login is correct login and return to homepage and add "LoggedInUser" to session
+    // (LoggedInUser is used as the check if the user is logged in)
+    // otherwise return to login page
     @PostMapping("/login")
     public String login(RecipeUser recipeUser, BindingResult result, Model model, HttpSession session) {
         if(result.hasErrors()) {
@@ -54,6 +59,9 @@ public class LoginController {
         return "login";
     }
 
+    // signup
+    // create new user if the username selected does not exist
+    // otherwise return error
     @PostMapping("/signup")
     public String AddUser (RecipeUser recipeUser, BindingResult result, Model model) {
         if (result.hasErrors()) {

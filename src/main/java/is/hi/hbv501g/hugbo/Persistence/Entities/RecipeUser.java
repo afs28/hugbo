@@ -6,7 +6,8 @@ import javax.persistence.*;
 
 /**
  * The main recipe user class, getters and setters.
- * @Authors: AFS
+ * @Authors: AFS, BÝE
+ * the @column is used to make sure it goes to the right column in the database
  */
 
 @Entity

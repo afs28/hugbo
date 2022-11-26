@@ -17,6 +17,7 @@ public class RecipeUserController {
     private RecipeUserService recipeUserService;
 
     // checking for "LoggedInUser" in session
+    // this is used to check if the user is logged in
     private boolean isLoggedIn(HttpSession session, Model model) {
         RecipeUser sessionUser = (RecipeUser) session.getAttribute("LoggedInUser");
         if(sessionUser  != null){
@@ -35,7 +36,7 @@ public class RecipeUserController {
         return "redirect:/login";
     }
 
-    // remove LoggedInUser from session
+    // remove LoggedInUser from session (sign out)
     @RequestMapping(value="/logout", method = RequestMethod.POST)
     public String logout(HttpSession session, Model model) {
         if (isLoggedIn(session, model)) {

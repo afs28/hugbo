@@ -5,7 +5,9 @@
     <title>Sign up! ..or login to an existing account.</title>
 </head>
 <body>
+<!-- back to homepage button -->
 <a href="/">Homepage</a>
+<!-- sign up form -->
 <h2>Sign up for an account here:</h2>
 <form th:action="@{/signup}" th:object="${recipeUser}" method="post">
     <input type="text" name="recipeUsername" th:field="*{recipeUsername}" placeholder="Account name"/>
@@ -15,6 +17,7 @@
     <input type="submit" value="Sign up"/>
     <br>
 </form>
+<!-- log in form -->
 <H2>Or log in to an existing account:</H2>
 <form th:action="@{/login}" th:object="${recipeUser}" method="post">
     <input type="text" name="username" th:field="*{recipeUsername}" placeholder="Existing user"/>
