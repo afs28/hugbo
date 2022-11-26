@@ -19,8 +19,14 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpSession;
 
 /**
- * The main controller that handles recipes and users.
- * @Authors: AFS
+ *
+ * This controller handles most things related to the recipe
+ * entity itself!
+ *
+ * @author Arnar Freyr
+ * @author Birgitta Yr
+ * @author Heba Solveig
+ * @author Hrefna Karen
  *
  */
 
@@ -41,6 +47,15 @@ public class RecipeController {
     @Autowired
     private RecipeUserService recipeUserService;
 
+    /**
+     * This function takes you to a different template which includes a more comfortable
+     * view of the recipe you've chosen.
+     *
+     * @param session of the recipe.
+     * @param model of the template.
+     * @param id of the recipe.
+     * @return the selected recipe.
+     */
     @RequestMapping(value = "/recipe", method = RequestMethod.GET)
     @ResponseBody
     public Model displayRecipe(HttpSession session, Model model, @RequestParam String id) {
@@ -50,16 +65,21 @@ public class RecipeController {
         session.setAttribute("id", id);
 
         model.addAttribute("recipecomment", commentService.findByRecipeID(Long.parseLong(id)));
-        RecipeRatings[] temp = ratingService.findByRecipeID(Long.parseLong(id));
-        System.out.println(temp);
-        for (RecipeRatings t: temp) {
-            System.out.println(t.getMyRating());
-        }
         model.addAttribute("reciperating", ratingService.findByRecipeID(Long.parseLong(id)));
 
         return model;
     }
 
+    /**
+     * This function allows logged in users to add comments to the recipe
+     * that they're currently viewing.
+     *
+     * @param session of the recipe.
+     * @param model of the template.
+     * @param recipeUsername to enable commenting.
+     * @param recipeComment to save.
+     * @return to index.
+     */
     @PostMapping("/submit")
     public String AddComment (HttpSession session, Model model, @RequestParam String recipeUsername, @RequestParam String recipeComment) {
         try {
@@ -67,28 +87,29 @@ public class RecipeController {
 
             RecipeUser recipeUser = recipeUserService.findByRecipeUserID(id);
             RecipeComments newComment = new RecipeComments();
-            System.out.println(newComment);
 
             newComment.setCommentID(0l); // why can't this be skipped????
-            System.out.println(newComment.getCommentID());
-
             newComment.setMyComment(recipeComment);
-            System.out.println(newComment.getMyComment());
-
             newComment.setNickname(recipeUsername);
-            System.out.println(newComment.getNickname());
-
             newComment.setRecipeID(recipeUser.getRecipeUserID());
-            System.out.println(newComment.getRecipeID());
-
             commentRepository.save(newComment);
+
         }catch (Exception e){
             System.out.println(e);
         }
         return "index";
-        /*+ model.getAttribute("id");*/
     }
 
+    /**
+     * This function allows the user to add their own rating to the recipe
+     * they're currently viewing.
+     *
+     * @param session of the recipe.
+     * @param model of the template.
+     * @param recipeUsername to enable rating.
+     * @param recipeRating to be added.
+     * @return to index.
+     */
     @PostMapping("/Rsubmit")
     public String AddRating (HttpSession session, Model model, @RequestParam String recipeUsername, @RequestParam String recipeRating) {
         try {
