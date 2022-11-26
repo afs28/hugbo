@@ -2,6 +2,9 @@ package is.hi.hbv501g.hugbo.Persistence.Entities;
 
 import javax.persistence.*;
 
+/**
+ * The famous recipe entity! Declarations, getters and setters.
+ */
 @Entity
 @Table(name = "recipe")
 public class Recipe {
