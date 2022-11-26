@@ -7,17 +7,34 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-
 import javax.servlet.http.HttpSession;
 
+/**
+ *
+ * This controller handles all the log-in functions as well as the log-out functions.
+ * It displays the User profile but only if logged-in.
+ *
+ * @author Arnar Freyr
+ * @author Birgitta Yr
+ * @author Heba Solveig
+ * @author Hrefna Karen
+ *
+ */
 @Controller
 public class RecipeUserController {
 
-    //private RecipeUserRepository recipeUserRepository;
+    /**
+     * Attributes
+     */
     private RecipeUserService recipeUserService;
 
-    // checking for "LoggedInUser" in session
-    // this is used to check if the user is logged in
+    /**
+     * This method checks if the User is logged-in.
+     *
+     * @param session
+     * @param model
+     * @return if true, then the User is logged in. If false, then the User has to log-in.
+     */
     private boolean isLoggedIn(HttpSession session, Model model) {
         RecipeUser sessionUser = (RecipeUser) session.getAttribute("LoggedInUser");
         if(sessionUser  != null){
@@ -27,7 +44,13 @@ public class RecipeUserController {
         return false;
     }
 
-    // display profile if logged in
+    /**
+     * This method displays the profile but only if the User is logged-in.
+     *
+     * @param session
+     * @param model
+     * @return "redirect:/login"
+     */
     @RequestMapping(value="/profile", method = RequestMethod.GET)
     public String getProfile(HttpSession session, Model model) {
         if (isLoggedIn(session, model)) {
@@ -36,17 +59,30 @@ public class RecipeUserController {
         return "redirect:/login";
     }
 
-    // remove LoggedInUser from session (sign out)
+    /**
+     * This method implements the logout function and helps a "logged-in User" sign out.
+     *
+     * @param session
+     * @param model
+     * @return "redirect:/login"
+     */
     @RequestMapping(value="/logout", method = RequestMethod.POST)
     public String logout(HttpSession session, Model model) {
         if (isLoggedIn(session, model)) {
             session.removeAttribute("LoggedInUser");
-
         }
         return "redirect:/login";
     }
 
-    // change password, needs old password as confirmation
+    /**
+     *
+     * This method is for changing the User's password. It's currently not working.
+     * @param oldPassword
+     * @param newPassword
+     * @param model
+     * @param session
+     * @return "profile"
+     */
     @RequestMapping(value = "/profile/changePassword", method = RequestMethod.POST)
     public String changePassword(@RequestParam String oldPassword, @RequestParam String newPassword, Model model, HttpSession session) {
         model.addAttribute("passerror", "I would change your password, but it's not working... q.q");
@@ -63,5 +99,4 @@ public class RecipeUserController {
         }
         return "profile";
     }
-
 }
