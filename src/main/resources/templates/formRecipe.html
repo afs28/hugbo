@@ -1,79 +1,82 @@
 <!DOCTYPE html>
 <html xmlns:th="https://thymeleaf.org" lang="en">
+<!-- Add recipe-->
 <head>
     <meta charset="UTF-8">
     <title>View or add recipe</title>
 </head>
 <body>
+<!-- back button-->
 <input action="action" type="button" onclick="history.go(-1);" value="Back"/>
+<!-- Add recipe form-->
 <h2>Add your recipe!</h2>
 <form class="form-horizontal" method="post"
       th:action="@{/create}" th:object="${recipe}">
     <input th:field="*{recipeID}" type="hidden"/>
-
+    <!-- Title input-->
     <div class="form-group">
         <label class="col-sm-2 control-label">Title</label>
         <div class="col-sm-10">
             <input class="form-control" th:field="*{title}" type="text">
         </div>
     </div>
-
+    <!-- Description input-->
     <div class="form-group">
         <label class="col-sm-2 control-label">Description:</label>
         <div class="col-sm-10">
             <textarea class="form-control" th:field="*{description}" type="text"></textarea>
         </div>
     </div>
-
+    <!-- Difficulty level input-->
     <div class="form-group">
         <label class="col-sm-2 control-label">Difficulty level:</label>
         <div class="col-sm-10">
             <input class="form-control" th:field="*{difficultyLevel}" type="text">
         </div>
     </div>
-
+    <!-- Allergy Factors input-->
     <div class="form-group">
         <label class="col-sm-2 control-label">Allergy Factors:</label>
         <div class="col-sm-10">
             <input class="form-control" th:field="*{allergyFactors}" type="text">
         </div>
     </div>
-
+    <!-- Author's comment input-->
     <div class="form-group">
         <label class="col-sm-2 control-label">Comments:</label>
         <div class="col-sm-10">
             <input class="form-control" th:field="*{comments}" type="text">
         </div>
     </div>
-
+    <!-- Author's rating input-->
     <div class="form-group">
         <label class="col-sm-2 control-label">Ratings:</label>
         <div class="col-sm-10">
             <input class="form-control" th:field="*{ratings}" type="text">
         </div>
     </div>
-
+    <!-- Does not work, Image input-->
     <div class="form-group">
         <label class="col-sm-2 control-label">Image Of Recipe:</label>
         <div class="col-sm-10">
             <input class="form-control" th:field="*{imageOfRecipe}" type="text">
         </div>
     </div>
-
+    <!-- For Number Of People input-->
     <div class="form-group">
         <label class="col-sm-2 control-label">For Number Of People:</label>
         <div class="col-sm-10">
             <input class="form-control" th:field="*{forNumberOfPeople}" type="text">
         </div>
     </div>
-
+    <!-- Preparation Time input-->
     <div class="form-group">
         <label class="col-sm-2 control-label">Preparation Time:</label>
         <div class="col-sm-10">
             <input class="form-control" th:field="*{prepTime}" type="text">
         </div>
     </div>
-
+    <!-- Submit button-->
     <div class="form-group">
         <input class="btn btn-success" type="submit" value="Save">
     </div>

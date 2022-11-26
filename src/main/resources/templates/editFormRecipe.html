@@ -1,30 +1,38 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+<!-- Editing recipe -->
 <head>
   <meta charset="UTF-8">
   <title>Editing recipe...</title>
 </head>
 <body>
+<!-- back to recipe button -->
 <input action="action" type="button" onclick="history.go(-1);" value="Back"/>
 <h2>Edit your recipe!</h2>
+<!-- Edit recipe form -->
 <div class="container">
   <form action="#" th:action="@{/edit-recipe}" method="post" enctype="multipart/form-data">
+    <!-- Edit title input -->
     <div class="form-group">
       <label>Title</label>
       <input type="text"  th:value="${title}" name="title" id="title" class="form-control" required="required"/>
     </div>
+    <!-- Edit Description input -->
     <div class="form-group">
       <label>Description</label>
       <input type="text"  th:value="${description}" name="description" class="form-control" id="description" required="required"/>
     </div>
+    <!-- Edit Difficulty input -->
     <div class="form-group">
       <label>Difficulty</label>
       <input type="text"  th:value="${difficultyLevel}" name="difficultyLevel" class="form-control" id="difficultyLevel" required="required"/>
     </div>
+    <!-- Edit Allergy factors input -->
     <div class="form-group">
       <label>Allergy factors</label>
       <input type="text"  th:value="${allergyFactors}" name="allergyFactors" class="form-control" id="allergyFactors" required="required"/>
     </div>
+    <!-- Submit button-->
     <div class="col-lg-4 col-lg-offset-4">
       <div class="form-group">
         <div class="input-group">
