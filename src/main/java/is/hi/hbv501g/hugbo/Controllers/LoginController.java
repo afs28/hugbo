@@ -15,6 +15,15 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.servlet.http.HttpSession;
 
+/**
+ * this controller handles the login.html page
+ * both displaying it as well as handling its calls to 'login' and 'signup'
+ *
+ * @author Arnar Freyr
+ * @author Birgitta Yr
+ * @author Heba Solveig
+ * @author Hrefna Karen
+ */
 @Controller
 public class LoginController {
 
