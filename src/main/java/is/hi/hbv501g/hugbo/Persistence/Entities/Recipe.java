@@ -4,6 +4,12 @@ import javax.persistence.*;
 
 /**
  * The famous recipe entity! Declarations, getters and setters.
+ *
+ * @author Arnar Freyr
+ * @author Birgitta Yr
+ * @author Heba Solveig
+ * @author Hrefna Karen
+ *
  */
 @Entity
 @Table(name = "recipe")
