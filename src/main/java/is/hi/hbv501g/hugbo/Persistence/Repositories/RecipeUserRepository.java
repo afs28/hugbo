@@ -8,7 +8,7 @@ import java.util.List;
 /**
  * The recipe user repository.
  *
- * @@author Arnar Freyr
+ * @author Arnar Freyr
  * @author Birgitta Yr
  * @author Heba Solveig
  * @author Hrefna Kare

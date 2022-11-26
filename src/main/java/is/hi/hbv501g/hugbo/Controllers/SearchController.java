@@ -8,15 +8,31 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+/**
+ * This controller used to handle the Search function. But it's currently not being used.
+ *
+ * @author Arnar Freyr
+ * @author Birgitta Yr
+ * @author Heba Solveig
+ * @author Hrefna Karen
+ */
 @RestController
 public class SearchController {
 
+    /**
+     * Attributes
+     */
     @Autowired
     private RecipeService recipeService;
 
+    /**
+     * This method was meant to be our search method, but only worked for exact titles.
+     *
+     * @param toSearch
+     * @return recipeService.findByTitle(toSearch)
+     */
     @RequestMapping(value="/search", method = RequestMethod.POST)
-    public Iterable<Recipe> AddUser (@RequestParam String toSearch) {
-
+    public Iterable<Recipe> oldSearch (@RequestParam String toSearch) {
         return recipeService.findByTitle(toSearch);
     }
 }
