@@ -1,39 +1,30 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
-
+<!-- Homepage-->
 <head>
     <Title>Marvelous Meals</Title>
     <meta charset="UTF-8">
     <meta content="width=device-width, initial-scale=1, shrink-to-fit=no"
           name="viewport">
     <script th:src="@{jquery-3.6.1.min.js}"></script>
-
     <!-- filter -->
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.1/css/jquery.dataTables.css">
     <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.13.1/js/jquery.dataTables.js"></script>
 
 </head>
     <body>
-
     <h2>Welcome to Marvelous Meals.</h2>
     <ul>
+        <!-- link to log in/create account-->
         <li><a href="/login">Create account</a></li>
+        <!-- link to view your profile -->
         <li><a href="/profile">View your profile </a></li>
-        <!--
-        <li><a href="/list">show all users</a></li>
-
-        <li><a href="searchPage.html">Find a recipe! (yet to be implemented)</a></li>
-        <li><a href="formRecipe.html">View recipe (yet to be implemented)</a></li>
-        -->
     </ul>
+    <!-- link to create new recipe -->
     <div>
         <a th:href="@{/create}">Add a new recipe</a>
-        <!--
-        <a th:href="@{/addComment}">Comment on a recipe (yet to be implemented)</a>
-        <a th:href="@{/giveRating}">Rate a recipe (yet to be implemented)</a>
-        <a th:href="@{/filter}">I will filter things for you!(yet to be implemented)</a>
-        -->
     </div>
+    <!-- recipe table on homepage-->
     <table id="all_recipes" class="display">
         <thead>
         <tr>
@@ -67,6 +58,7 @@
         </tbody>
     </table>
 
+    <!-- script to enable filter -->
     <script>
         $(document).ready( function () {
             $('#all_recipes').DataTable();

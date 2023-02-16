@@ -1,6 +1,10 @@
 # hugbo
 A project for HBV501G. 
 
+Link to deployed application:
+
+https://hugbo-production.up.railway.app
+
 Participants were as listed:
 
 Arnar Freyr Sigurjonsson (afs28@hi.is)

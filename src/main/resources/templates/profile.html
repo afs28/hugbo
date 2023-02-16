@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+<!-- User Profile-->
 <head>
     <meta charset="UTF-8">
     <title>Profile</title>
@@ -18,16 +19,6 @@
     <a th:href="@{/create}">Add a new recipe</a>
   </p>
 
-  <!-- change password
-  <p>
-    <form th:action="@{/profile/changePassword}" method="post">
-      <p th:text="${passerror}"></p>
-      <input type="text" name="oldPassword" id="oldPassword" placeholder="Old Password"/>
-      <input type="text" name="newPassword" id="newPassword" placeholder="New Password"/>
-      <input type="submit" value="change password"/>
-    </form>
-  </p>
-  -->
   <!-- log out -->
   <p>
     <form th:action="@{/logout}" method="post">

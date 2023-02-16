@@ -1,57 +1,62 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+<!-- Recipe page -->
 <head>
     <meta charset="UTF-8">
     <title>view recipe</title>
 </head>
 <body>
-
+<!-- back to homepage button -->
 <h1 class="homepage">
   <a class="homepage-link" href="/">Marvelous Meals</a>
 </h1>
+  <!-- Recipe form -->
   <div th:object="${recipe}">
     <div class="author-look">
     <h1 th:text="${recipe.title}"></h1>
+      <!-- link to edit recipe -->
       <a class="edit" th:href="@{/edit-recipe}" method="get">Edit Recipe</a>
     </div>
     <div class="recipe-look">
     <div class="look">
       <div class="keys">
-      <p class="rating-nickname">Difficulty level: </p>
+      <p class="nickname">Difficulty level: </p>
       <p th:text="${recipe.difficultyLevel}"></p>
       </div>
       <div class="keys">
-      <p class="rating-nickname">Allergy Factors: </p>
+      <p class="nickname">Allergy Factors: </p>
       <p th:text="${recipe.allergyFactors}"></p>
       </div>
       <div class="keys">
-      <p class="rating-nickname">This recipe is suitable for(number of people): </p>
+      <p class="nickname">This recipe is suitable for(number of people): </p>
       <p th:text="${recipe.forNumberOfPeople}"></p>
       </div>
       <div class="keys">
-      <p class="rating-nickname">Time(minutes): </p>
+      <p class="nickname">Time(minutes): </p>
       <p th:text="${recipe.prepTime}"></p>
       </div>
     </div>
       <div>
         <div>
-        <p class="rating-nickname" >Author's comments: </p>
+        <p class="nickname" >Author's comments: </p>
         <pre class="author" th:text="${recipe.comments}"></pre>
       </div>
         <div class="author-look">
-        <p class="rating-nickname">Author's rating:</p>
+        <p class="nickname">Author's rating:</p>
         <p th:text="${recipe.ratings}"></p>
         <p th:text="${recipe.imageOfRecipe}"></p>
         </div>
       </div>
     <h3>Here is the recipe: </h3>
-    <pre class="recipe-description" th:text="${recipe.description}"></pre>
+    <pre th:text="${recipe.description}"></pre>
     </div>
   </div>
   <div>
+    <!-- Comment form -->
     <h3>
       Leave a comment here!
     </h3>
+
     <table>
       <thead>
       <tr>
@@ -60,7 +65,7 @@
       </thead>
       <tbody>
       <tr th:each="recipe : ${recipecomment}">
-        <td class="rating-nickname" th:text="${recipe.nickname}">:</td>
+        <td class="nickname" th:text="${recipe.nickname}">:</td>
         <td th:text="${recipe.myComment}"></td>
       </tr>
       </tbody>
@@ -71,6 +76,7 @@
       <textarea class="comment-section" name="recipeComment" placeholder="Write your comment here!" style="text-align: left"></textarea>
       <input class="submit-button" type="submit" value="submit"/>
     </form>
+    <!-- Rating form -->
     <h3>
       Leave a rating here!
     </h3>
@@ -83,7 +89,7 @@
       <tbody>
       <tr class="ratings" th:each="rating: ${reciperating}">
         <div class="flex-box">
-          <td class="rating-nickname" th:text="${rating.nickname}">:</td>
+          <td class="nickname" th:text="${rating.nickname}">:</td>
           <td th:text="${rating.myRating}"></td>
         </div>
       </tr>
@@ -92,11 +98,12 @@
     <form th:action="@{/Rsubmit}" method="post" class="flex-box">
       <label>Username:</label>
       <input class="name-input" name="recipeUsername">
-      <input class="rating-section" name="recipeRating" placeholder="Write your rating here!" style="text-align: left"></input>
+      <input class="rating-section" name="recipeRating" placeholder="Write your rating here!" style="text-align: left">
       <input class="submit-button" type="submit" value="submit"/>
     </form>
   </div>
 
+  <!-- defines style information (CSS) for the recipes, comments and ratings -->
   <style>
     body{
       padding: 16px;
@@ -121,13 +128,13 @@
     pre
     {
       font-family:"Times New Roman", Times, serif;
-      white-space: pre-wrap;       /* Since CSS 2.1 */
-      white-space: -moz-pre-wrap;  /* Mozilla, since 1999 */
-      white-space: pre-wrap;      /* Opera 4-6 */
-      white-space: -o-pre-wrap;    /* Opera 7 */
-      word-wrap: break-word;       /* Internet Explorer 5.5+ */
+      white-space: pre-wrap;
+      white-space: -moz-pre-wrap;
+      white-space: pre-wrap;
+      white-space: -o-pre-wrap;
+      word-wrap: break-word;
     }
-    .rating-nickname {
+    .nickname {
       font-weight: bold;
       padding-right: 16px;
     }
@@ -168,9 +175,6 @@
       top: 142px;
       right: 28px;
       font-size: 18px;
-    }
-    .recipe-description{
-
     }
   </style>
 </body>
