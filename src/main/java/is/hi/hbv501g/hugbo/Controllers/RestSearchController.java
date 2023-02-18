@@ -19,20 +19,5 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class RestSearchController {
 
-    /**
-     * Attributes
-     */
-    @Autowired
-    private RecipeService recipeService;
 
-    /**
-     * This method was meant to be our search method, but only worked for exact titles.
-     *
-     * @param toSearch
-     * @return recipeService.findByTitle(toSearch)
-     */
-    @RequestMapping(value="/search", method = RequestMethod.POST)
-    public Iterable<Recipe> oldSearch (@RequestParam String toSearch) {
-        return recipeService.findByTitle(toSearch);
-    }
 }
