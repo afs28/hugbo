@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import is.hi.hbv501g.hugbo.Controllers.RecipeController;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.util.List;
 
 /**
  *
@@ -32,9 +33,9 @@ public class RestHomeController {
     }
 
     @GetMapping("/index")
-    public String createHome(Model model) {
-        model.addAttribute("recipe", recipeService.findAll());
-        return "index";
+    @ResponseBody
+    public List<Recipe> getRecipes() {
+        return recipeService.findAll();
     }
 
 }
