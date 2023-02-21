@@ -25,4 +25,16 @@ import javax.servlet.http.HttpSession;
 @RestController
 public class RestHomeController {
 
+    final RecipeService recipeService;
+
+    public RestHomeController(RecipeService recipeService) {
+        this.recipeService = recipeService;
+    }
+
+    @GetMapping("/index")
+    public String createHome(Model model) {
+        model.addAttribute("recipe", recipeService.findAll());
+        return "index";
+    }
+
 }
