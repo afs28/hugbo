@@ -33,7 +33,7 @@ public class RestHomeController {
         this.recipeService = recipeService;
     }
 
-    @GetMapping("/")
+    @GetMapping("")
     @ResponseBody
     public List<Recipe> getRecipes() {
         return recipeService.findAll();
