@@ -31,7 +31,77 @@ import javax.servlet.http.HttpSession;
  */
 
 @RestController
+@RequestMapping("/api")
 @SessionAttributes("recipe")
 public class RestRecipeController {
+    private final RecipeService recipeService;
+    private final CommentService commentService;
+    private final RatingService ratingService;
+    private final CommentRepository commentRepository;
+    private final RatingRepository ratingRepository;
+    private final RecipeUserService recipeUserService;
+
+    public RestRecipeController(RecipeService recipeService, CommentService commentService,
+                            RatingService ratingService, CommentRepository commentRepository,
+                            RatingRepository ratingRepository, RecipeUserService recipeUserService) {
+        this.recipeService = recipeService;
+        this.commentService = commentService;
+        this.ratingService = ratingService;
+        this.commentRepository = commentRepository;
+        this.ratingRepository = ratingRepository;
+        this.recipeUserService = recipeUserService;
+    }
+
+    /**
+     * This function takes you to a different template which includes a more comfortable
+     * view of the recipe you've chosen.
+     *
+     * @param id of the recipe.
+     * @return the selected recipe.
+     */
+    @GetMapping("/{id}")
+    public Recipe displayRecipe(@PathVariable Long id) {
+        Recipe rep = recipeService.findByID(id);
+        //rep.setComments(commentService.findByRecipeID(id));
+        //rep.setRatings(ratingService.findByRecipeID(id));
+        return rep;
+    }
+
+    /**
+     * This function allows logged-in users to add comments to the recipe
+     * that they're currently viewing.
+     *
+     * @param recipeUsername to enable commenting.
+     * @param recipeComment to save.
+     * @return the updated recipe.
+     */
+    @PostMapping("/{id}/comment")
+    public Recipe addComment(@PathVariable Long id, @RequestParam String recipeUsername, @RequestParam String recipeComment) {
+        RecipeUser recipeUser = recipeUserService.findByRecipeUserID(id);
+        RecipeComments newComment = new RecipeComments();
+        newComment.setMyComment(recipeComment);
+        newComment.setNickname(recipeUsername);
+        newComment.setRecipeID(recipeUser.getRecipeUserID());
+        commentRepository.save(newComment);
+        return displayRecipe(id);
+    }
+
+    /**
+     * This function allows the user to add their own rating to the recipe
+     * they're currently viewing.
+     *
+     * @param recipeUsername to enable rating.
+     * @param recipeRating to be added.
+     * @return the updated recipe.
+     */
+    @PostMapping("/{id}/rating")
+    public Recipe addRating(@PathVariable Long id, @RequestParam String recipeUsername, @RequestParam Double recipeRating) {
+        RecipeRatings newRating = new RecipeRatings();
+        newRating.setMyRating(recipeRating);
+        newRating.setNickname(recipeUsername);
+        newRating.setRecipeID(id);
+        ratingRepository.save(newRating);
+        return displayRecipe(id);
+    }
 
 }
