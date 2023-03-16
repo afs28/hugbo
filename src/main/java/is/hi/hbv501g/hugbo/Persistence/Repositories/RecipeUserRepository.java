@@ -15,7 +15,7 @@ import java.util.List;
  * @author Hrefna Kare
  */
 
-public interface RecipeUserRepository extends CrudRepository<RecipeUser, Long> {
+public interface RecipeUserRepository extends JpaRepository<RecipeUser, Long> {
 
     RecipeUser save(RecipeUser recipeUser);
     void delete(RecipeUser recipeUser);

@@ -12,7 +12,7 @@ import org.springframework.data.repository.CrudRepository;
  * @author Heba Solveig
  * @author Hrefna Kare
  */
-public interface RatingRepository extends CrudRepository<RecipeRatings, Long> {
+public interface RatingRepository extends JpaRepository<RecipeRatings, Long> {
 
     RecipeRatings findByRatingID(long ratingID);
     RecipeRatings[] findByRecipeID(long recipeID);
