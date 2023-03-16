@@ -2,6 +2,7 @@ package is.hi.hbv501g.hugbo.Persistence.Repositories;
 
 import is.hi.hbv501g.hugbo.Persistence.Entities.Recipe;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.repository.CrudRepository;
 
 import java.util.List;
 
@@ -14,7 +15,7 @@ import java.util.List;
  * @author Hrefna Kare
  */
 
-public interface RecipeRepository extends JpaRepository<Recipe, Long> {
+public interface RecipeRepository extends CrudRepository<Recipe, Long> {
 
     Recipe save(Recipe recipe);
     void delete(Recipe recipe);

@@ -2,6 +2,7 @@ package is.hi.hbv501g.hugbo.Persistence.Repositories;
 
 import is.hi.hbv501g.hugbo.Persistence.Entities.RecipeComments;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.repository.CrudRepository;
 
 /**
  * The recipe comment repository.
@@ -11,7 +12,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
  * @author Heba Solveig
  * @author Hrefna Kare
  */
-public interface CommentRepository extends JpaRepository<RecipeComments, Long> {
+public interface CommentRepository extends CrudRepository<RecipeComments, Long> {
 
     RecipeComments findByCommentID(long commentID);
     RecipeComments[] findByRecipeID(long recipeID);

@@ -2,6 +2,7 @@ package is.hi.hbv501g.hugbo.Persistence.Repositories;
 
 import is.hi.hbv501g.hugbo.Persistence.Entities.RecipeRatings;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.repository.CrudRepository;
 
 /**
  * The recipe rating repository.
@@ -11,7 +12,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
  * @author Heba Solveig
  * @author Hrefna Kare
  */
-public interface RatingRepository extends JpaRepository<RecipeRatings, Long> {
+public interface RatingRepository extends CrudRepository<RecipeRatings, Long> {
 
     RecipeRatings findByRatingID(long ratingID);
     RecipeRatings[] findByRecipeID(long recipeID);
