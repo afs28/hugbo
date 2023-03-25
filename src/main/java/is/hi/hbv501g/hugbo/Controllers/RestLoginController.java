@@ -6,13 +6,9 @@ import is.hi.hbv501g.hugbo.Persistence.Repositories.RecipeUserRepository;
 import is.hi.hbv501g.hugbo.Services.RecipeService;
 import is.hi.hbv501g.hugbo.Services.RecipeUserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-
-import javax.servlet.http.HttpSession;
 
 /**
  * this controller handles the login.html page
@@ -37,13 +33,12 @@ public class RestLoginController {
     RecipeUserService recipeUserService;
 
     @PostMapping("/login")
-    public ResponseEntity<?> login(@RequestBody RecipeUser recipeUser, HttpSession session) {
+    public ResponseEntity<RecipeUser> login(@RequestBody RecipeUser recipeUser) {
         RecipeUser exists = recipeUserService.login(recipeUser);
         if (exists != null) {
-            session.setAttribute("LoggedInUser", exists);
-            return ResponseEntity.ok().body(exists);
+            return ResponseEntity.ok(exists);
         }
-        return ResponseEntity.badRequest().body("Invalid login credentials");
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
     }
 
     @PostMapping("/signup")
@@ -51,8 +46,8 @@ public class RestLoginController {
         RecipeUser exists = recipeUserService.findByRecipeUsername(recipeUser.getRecipeUsername());
         if (exists == null) {
             recipeUserRepository.save(recipeUser);
-            return ResponseEntity.ok().body("User created successfully");
+            return ResponseEntity.status(HttpStatus.CREATED).build();
         }
-        return ResponseEntity.badRequest().body("Username already exists");
+        return ResponseEntity.status(HttpStatus.CONFLICT).build();
     }
 }
