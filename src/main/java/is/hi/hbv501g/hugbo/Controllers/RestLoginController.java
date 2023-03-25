@@ -46,8 +46,8 @@ public class RestLoginController {
         RecipeUser exists = recipeUserService.findByRecipeUsername(recipeUser.getRecipeUsername());
         if (exists == null) {
             recipeUserRepository.save(recipeUser);
-            return ResponseEntity.status(HttpStatus.CREATED).build();
+            return ResponseEntity.status(HttpStatus.CREATED).body("{\"message\":\"User created successfully.\"}");
         }
-        return ResponseEntity.status(HttpStatus.CONFLICT).build();
+        return ResponseEntity.status(HttpStatus.CONFLICT).body("{\"message\":\"The chosen username is already in use. Please choose a different one.\"}");
     }
 }
