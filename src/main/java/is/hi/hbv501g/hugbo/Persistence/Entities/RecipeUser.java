@@ -1,5 +1,6 @@
 package is.hi.hbv501g.hugbo.Persistence.Entities;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.sun.istack.NotNull;
 
 import javax.persistence.*;
@@ -24,9 +25,11 @@ public class RecipeUser {
     private long recipeUserID;
     @NotNull
     @Column(name = "recipeusername")
+    @JsonProperty("recipeUsername")
     private String recipeUsername;
     @NotNull
     @Column(name = "recipeuserpassword")
+    @JsonProperty("recipeUserPassword")
     private String recipeUserPassword;
 
     public RecipeUser() {
