@@ -17,9 +17,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 /**
  *
@@ -45,8 +42,8 @@ public class RestRecipeController {
     private final RecipeUserService recipeUserService;
 
     public RestRecipeController(RecipeService recipeService, CommentService commentService,
-                            RatingService ratingService, CommentRepository commentRepository,
-                            RatingRepository ratingRepository, RecipeUserService recipeUserService) {
+                                RatingService ratingService, CommentRepository commentRepository,
+                                RatingRepository ratingRepository, RecipeUserService recipeUserService) {
         this.recipeService = recipeService;
         this.commentService = commentService;
         this.ratingService = ratingService;
@@ -63,15 +60,12 @@ public class RestRecipeController {
      * @return the selected recipe.
      */
     @GetMapping("/{id}")
-    public Map<String, Object> displayRecipe(@PathVariable Long id) {
-        Recipe recipe = recipeService.findByID(id);
-        RecipeComments[] comments = commentService.findByRecipeID(id);
-        Map<String, Object> response = new HashMap<>();
-        response.put("recipe", recipe);
-        response.put("comments", comments);
-        return response;
+    public Recipe displayRecipe(@PathVariable Long id) {
+        Recipe rep = recipeService.findByID(id);
+        //rep.setComments(commentService.findByRecipeID(id));
+        //rep.setRatings(ratingService.findByRecipeID(id));
+        return rep;
     }
-
 
     /**
      * This function allows logged-in users to add comments to the recipe
@@ -82,7 +76,7 @@ public class RestRecipeController {
      * @return the updated recipe.
      */
     @PostMapping("/{id}/comment")
-    public Map<String, Object> addComment(@PathVariable Long id, @RequestParam String recipeUsername, @RequestParam String recipeComment) {
+    public Recipe addComment(@PathVariable Long id, @RequestParam String recipeUsername, @RequestParam String recipeComment) {
         RecipeUser recipeUser = recipeUserService.findByRecipeUserID(id);
         RecipeComments newComment = new RecipeComments();
         newComment.setMyComment(recipeComment);
@@ -91,7 +85,6 @@ public class RestRecipeController {
         commentRepository.save(newComment);
         return displayRecipe(id);
     }
-
 
     /**
      * This function allows the user to add their own rating to the recipe
@@ -102,7 +95,7 @@ public class RestRecipeController {
      * @return the updated recipe.
      */
     @PostMapping("/{id}/rating")
-    public Map<String, Object> addRating(@PathVariable Long id, @RequestParam String recipeUsername, @RequestParam Double recipeRating) {
+    public Recipe addRating(@PathVariable Long id, @RequestParam String recipeUsername, @RequestParam Double recipeRating) {
         RecipeRatings newRating = new RecipeRatings();
         newRating.setMyRating(recipeRating);
         newRating.setNickname(recipeUsername);
@@ -110,4 +103,5 @@ public class RestRecipeController {
         ratingRepository.save(newRating);
         return displayRecipe(id);
     }
+
 }
