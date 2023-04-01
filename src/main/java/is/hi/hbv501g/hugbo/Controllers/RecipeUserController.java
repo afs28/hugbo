@@ -35,7 +35,7 @@ public class RecipeUserController {
      * @param model
      * @return if true, then the User is logged in. If false, then the User has to log-in.
      */
-    private boolean isLoggedIn(HttpSession session, Model model) {
+    static boolean isLoggedIn(HttpSession session, Model model) {
         RecipeUser sessionUser = (RecipeUser) session.getAttribute("LoggedInUser");
         if(sessionUser  != null){
             model.addAttribute("LoggedInUser", sessionUser);

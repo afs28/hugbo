@@ -59,14 +59,18 @@ public class RecipeController {
     @RequestMapping(value = "/recipe", method = RequestMethod.GET)
     @ResponseBody
     public Model displayRecipe(HttpSession session, Model model, @RequestParam String id) {
-        Recipe rep = recipeService.findByID(Long.parseLong(id));
-        model.addAttribute("recipe", rep);
-        model.addAttribute("id", id);
-        session.setAttribute("id", id);
+        try {
+            long parsedId = Long.parseLong(id);
+            Recipe rep = recipeService.findByID(parsedId);
+            model.addAttribute("recipe", rep);
+            model.addAttribute("id", id);
+            session.setAttribute("id", id);
 
-        model.addAttribute("recipecomment", commentService.findByRecipeID(Long.parseLong(id)));
-        model.addAttribute("reciperating", ratingService.findByRecipeID(Long.parseLong(id)));
-
+            model.addAttribute("recipecomment", commentService.findByRecipeID(parsedId));
+            model.addAttribute("reciperating", ratingService.findByRecipeID(parsedId));
+        } catch (NumberFormatException e) {
+            System.out.println(e);
+        }
         return model;
     }
 
@@ -81,24 +85,32 @@ public class RecipeController {
      * @return to index.
      */
     @PostMapping("/submit")
-    public String AddComment (HttpSession session, Model model, @RequestParam String recipeUsername, @RequestParam String recipeComment) {
+    public String AddComment(HttpSession session, Model model, @RequestParam String recipeUsername, @RequestParam String recipeComment) {
         try {
-            long id = Long.parseLong((String)session.getAttribute("id"));
+            long id = Long.parseLong((String) session.getAttribute("id"));
+            RecipeUser loggedInUser = null;
 
-            RecipeUser recipeUser = recipeUserService.findByRecipeUserID(id);
-            RecipeComments newComment = new RecipeComments();
+            if (RecipeUserController.isLoggedIn(session, model)) {
+                loggedInUser = (RecipeUser) session.getAttribute("LoggedInUser");
+            }
 
-            newComment.setCommentID(0l); // why can't this be skipped????
-            newComment.setMyComment(recipeComment);
-            newComment.setNickname(recipeUsername);
-            newComment.setRecipeID(recipeUser.getRecipeUserID());
-            commentRepository.save(newComment);
-
-        }catch (Exception e){
+            if (loggedInUser != null) {
+                RecipeComments newComment = new RecipeComments();
+                newComment.setCommentID(0l);
+                newComment.setMyComment(recipeComment);
+                newComment.setNickname(recipeUsername);
+                newComment.setRecipeID(id); // Use the 'id' variable for the recipeID attribute
+                commentRepository.save(newComment);
+            } else {
+                // Handle the case where the loggedInUser is not found, e.g., display an error message
+                System.out.println("User not found");
+            }
+        } catch (Exception e) {
             System.out.println(e);
         }
         return "index";
     }
+
 
     /**
      * This function allows the user to add their own rating to the recipe
