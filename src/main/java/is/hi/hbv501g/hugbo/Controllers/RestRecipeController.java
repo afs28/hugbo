@@ -17,10 +17,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  *
@@ -69,31 +66,39 @@ public class RestRecipeController {
     public Map<String, Object> displayRecipe(@PathVariable Long id) {
         Recipe recipe = recipeService.findByID(id);
         List<RecipeComments> comments = Arrays.asList(commentService.findByRecipeID(id));
+        List<String> formattedComments = new ArrayList<>();
+        for (RecipeComments comment : comments) {
+            String formattedComment = comment.getNickname() + ": " + comment.getMyComment();
+            formattedComments.add(formattedComment);
+        }
         List<RecipeRatings> ratings = Arrays.asList(ratingService.findByRecipeID(id));
 
         Map<String, Object> response = new HashMap<>();
         response.put("recipe", recipe);
-        response.put("comments", comments);
+        response.put("comments", formattedComments);
         response.put("ratings", ratings);
         return response;
     }
 
 
     @PostMapping("/{id}/comments")
-    public Recipe addComment(@PathVariable Long id, @RequestBody RecipeComments recipeComment) {
+    public Recipe addComment(@PathVariable Long id, @RequestParam String comment) {
         RecipeUser recipeUser = recipeUserService.findByRecipeUserID(id);
+        RecipeComments recipeComment = new RecipeComments();
         recipeComment.setRecipeID(recipeUser.getRecipeUserID());
+        recipeComment.setMyComment(comment);
         commentRepository.save(recipeComment);
         return recipeService.findByID(id);
     }
 
 
 
+/*
     @PostMapping("/{id}/ratings")
     public Recipe addRating(@PathVariable Long id, @RequestBody RecipeRatings recipeRatings) {
         recipeRatings.setRecipeID(id);
         ratingRepository.save(recipeRatings);
         return recipeService.findByID(id);
     }
-
+*/
 }
