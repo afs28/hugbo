@@ -42,8 +42,8 @@ public class RestRecipeController {
     private final RecipeUserService recipeUserService;
 
     public RestRecipeController(RecipeService recipeService, CommentService commentService,
-                            RatingService ratingService, CommentRepository commentRepository,
-                            RatingRepository ratingRepository, RecipeUserService recipeUserService) {
+                                RatingService ratingService, CommentRepository commentRepository,
+                                RatingRepository ratingRepository, RecipeUserService recipeUserService) {
         this.recipeService = recipeService;
         this.commentService = commentService;
         this.ratingService = ratingService;

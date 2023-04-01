@@ -1,6 +1,7 @@
 package is.hi.hbv501g.hugbo.Persistence.Entities;
 
 import javax.persistence.*;
+import java.util.List;
 
 /**
  * The famous recipe entity! Declarations, getters and setters.
@@ -110,4 +111,5 @@ public class Recipe {
     public void setPrepTime(Integer prepTime) {
         this.prepTime = prepTime;
     }
+
 }
